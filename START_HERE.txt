@@ -1,0 +1,26 @@
+EVENTRA v2 - Next.js + Supabase (schema event)
+
+FITUR BARU:
+1) Upload foto event (JPG/PNG/WebP; max 10 foto, 5 MB per foto).
+2) Rundown acara (waktu, kegiatan, PJ, catatan).
+3) Notifikasi otomatis dalam dashboard tanpa tombol izin.
+4) Supabase Cron per jam untuk menghasilkan notifikasi ketika dashboard tertutup.
+
+DATABASE LAMA YANG SUDAH MEMAKAI SCHEMA event:
+1. Periksa Data API > Exposed schemas: tambahkan "event" (wajib agar tidak PGRST106).
+2. Jalankan supabase/migrations/002_repair_profiles_existing.sql jika profil bermasalah.
+3. Jalankan supabase/migrations/003_photos_rundown.sql (WAJIB untuk foto/rundown).
+4. Aktifkan Integrations > Cron jika belum.
+5. Jalankan supabase/cron/002_schedule_auto_notifications.sql.
+
+DATABASE BARU:
+Jalankan migrations 001, 002, 003 secara berurutan dan aktifkan Cron seperti di atas.
+
+NEXT.JS:
+Salin .env.example -> .env.local, isi URL dan Supabase anon/publishable key.
+Pastikan .env.local memakai project yang sama dengan Supabase SQL Editor.
+
+npm install
+npm run dev
+
+Baca README.md untuk penjelasan lengkap dan batasan izin notifikasi browser.
